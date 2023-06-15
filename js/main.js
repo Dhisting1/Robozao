@@ -1,6 +1,9 @@
 const controle = document.querySelectorAll("[data-controle]");
 const estatistica = document.querySelectorAll("[data-estatistica]");
-
+const trocarCor = document.querySelector(".cor");
+const mudaCorBtn = document.querySelector("#mudaCor");
+const roboImg = document.querySelector("#robozao");
+let indiceCorAtual = 0;
 const pecas = {
   bracos: {
     forca: 29,
@@ -33,6 +36,18 @@ const pecas = {
     velocidade: -2,
   },
 };
+const robos = [
+  "Robotron-Azul",
+  "Robotron-Branco",
+  "Robotron-Amarelo",
+  "Robotron-Preto",
+  "Robotron-Rosa",
+  "Robotron-Vermelho",
+];
+mudaCorBtn.addEventListener("click", (evt) => {
+  evt.preventDefault();
+  mudaDeCor();
+});
 
 controle.forEach((elemento) => {
   elemento.addEventListener("click", (evento) => {
@@ -41,6 +56,13 @@ controle.forEach((elemento) => {
   });
 });
 
+function mudaDeCor() {
+  roboImg.setAttribute("src", `../img/${robos[indiceCorAtual]}.png`);
+  indiceCorAtual++;
+  if (indiceCorAtual === robos.length) {
+    indiceCorAtual = 0;
+  }
+}
 function manipulaDados(operation, controle) {
   const peca = controle.querySelector("[data-contador]");
 
